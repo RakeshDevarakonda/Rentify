@@ -1,0 +1,78 @@
+* {
+  font-family: Montserrat;
+  box-sizing: border-box;
+  margin: 0px;
+  padding: 0px;
+}
+.signincomponent {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* background-color: #f0f0f0; */
+  margin-top: 100px;
+}
+
+.signincomponent .container {
+  width: 100%;
+  max-width: 400px;
+  padding: 30px;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+}
+
+.signincomponent .loginform {
+  width: 100%;
+}
+
+.signincomponent .loginform h2 {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.signincomponent .inputgroup {
+  margin-bottom: 15px;
+}
+
+.signincomponent .inputgroup label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.signincomponent .inputgroup input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.signincomponent .signinbutton {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  background-color: #007bff;
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.signincomponent .signinbutton:hover {
+  background-color: #0056b3;
+}
+
+@media (max-width: 600px) {
+  .signincomponent .container {
+    padding: 15px;
+  }
+
+  .signincomponent .loginform h2 {
+    font-size: 24px;
+  }
+
+  .signincomponent .signinbutton {
+    font-size: 14px;
+  }
+}

@@ -1,0 +1,80 @@
+*{
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+
+}
+
+.signupcomponent {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* height: 100%; */
+  margin-top: 100px;
+
+}
+
+.signupcomponent .container {
+    width: 100%;
+    max-width: 400px;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+.signupcomponent .signupform {
+    width: 100%;
+}
+
+.signupcomponent .signupform h2 {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.signupcomponent .inputgroup {
+    margin-bottom: 15px;
+}
+
+.signupcomponent .inputgroup label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.signupcomponent .inputgroup input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.signupcomponent .submitbutton {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    background-color: #007BFF;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.signupcomponent .submitbutton:hover {
+    background-color: #0056b3;
+}
+
+@media (max-width: 600px) {
+    .signupcomponent .container {
+        padding: 15px;
+    }
+
+    .signupcomponent .signupform h2 {
+        font-size: 24px;
+    }
+
+    .signupcomponent .submitbutton {
+        font-size: 14px;
+    }
+}

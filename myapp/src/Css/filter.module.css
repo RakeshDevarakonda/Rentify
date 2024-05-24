@@ -1,0 +1,61 @@
+.toggleFilters {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    /* margin-left: 10%;
+    margin-top: 20px;
+    margin-bottom: 20px; */
+  
+}
+
+.toggleFilters:hover {
+    background-color: #7d8d9f;
+}
+
+.filterList {
+    display: none;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.mySelect {
+    padding: 8px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.mySelect option {
+    background-color: #fff;
+    color: #333;
+    cursor: pointer;
+}
+
+@media screen and (max-width:576px) {
+    .mySelect {
+        width: 100%;
+    }
+}
+
+.filterList{
+    margin-top: 30px;
+}
+
+
+.resetFilters {
+    padding: 8px;
+    font-size: 16px;
+    border: 1px solid #474646;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    margin-right: 10px;
+    cursor: pointer;
+}

@@ -1,0 +1,256 @@
+@media screen and (max-width: 768px) {
+  .container{
+    width: 90% !important;
+  }
+  .rentdata {
+    width: calc(100%/2 - 20px) !important;
+  }
+
+}
+
+
+
+@media screen and (max-width: 450px) {
+  .container{
+    width: 90% !important;
+  }
+  .rentdata {
+    width:100% !important;
+  }
+
+}
+
+
+.entirerentdata {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.container {
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.rentdata {
+  display: flex;
+  justify-content: start;
+  flex-direction: column;
+  padding: 5px;
+  height: auto;
+  width: 280px;
+  margin: 10px 5px;
+}
+
+.rentimage {
+  height: 200px;
+  flex: 1 1 200px;
+  max-width: 800px;
+  /* overflow: hidden; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+}
+
+.imageanchoretag{
+  height: 100%;
+  width: 100%;
+}
+
+.rentdata img {
+  object-fit: cover;
+  height: 200px;
+  width: 100%;
+}
+
+.rentdetails {
+  height: 40%;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  padding: 5px;
+  
+}
+.rentdetails p {
+  margin: 5px 0px;
+}
+
+.rentimage{
+  position: relative;
+}
+.settingsbutton{
+  font-size: 1.5rem;
+  position: absolute;
+  z-index: 11;
+  top: 0;
+  right: 0;
+  padding: 5px;
+  background-color: rgb(207, 255, 237);
+  color: rgb(0, 0, 0);
+  cursor: pointer;
+}
+.tooltip{
+  font-size: 1rem;
+  position: absolute;
+  z-index: 111111111111111111;
+  top: 20%;
+  right: -15%;
+  padding: 5px;
+  background-color: white;
+  color: rgb(0, 0, 0);
+  width: 150px;
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+.tooltip a{
+  text-align: center;
+  margin: 0;
+  padding: 5px;
+  color: black;
+  text-transform: capitalize;
+}
+
+.tooltip a:hover{
+  background-color: whitesmoke;
+}
+
+
+
+.tooltip button{
+  text-align: center;
+  margin: 0;
+  padding: 5px;
+  color: black;
+  text-transform: capitalize;
+  background-color: transparent;
+  border: 0;
+}
+
+.tooltip button:hover{
+  background-color: whitesmoke;
+}
+
+
+
+
+/* pagination */
+
+.pagination {
+  display: flex;
+  list-style-type: none;
+  padding: 0;
+  justify-content: center;
+  margin-bottom: 50px;
+  margin-top: 30px;
+}
+
+.pageitem {
+  margin: 0 5px;
+}
+
+.pagelink {
+  display: block;
+  padding: 8px 16px;
+  text-decoration: none;
+  color: #007bff;
+  background-color: #fff;
+  border: 1px solid #dee2e6;
+  border-radius: 4px;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.pagelink:hover {
+  /* background-color: #007bff; */
+  color: #000000;
+  border-color: #007bff;
+  cursor: pointer;
+}
+
+.pageitem.active .pagelink {
+  background-color: #007bff;
+  color: #fff;
+  border-color: #007bff;
+  cursor: default;
+}
+
+.pageitem.disabled .pagelink {
+  color: #6c757d;
+  pointer-events: none;
+  background-color: #fff;
+  border-color: #dee2e6;
+}
+
+
+.activepage .pagelink{
+  background-color: #007bff;
+  color: #fff;
+  border-color: #007bff;
+  cursor: pointer;
+
+}
+
+.filtercomponent{
+
+  margin: 30px 0px;
+  margin-left: 20px;
+}
+
+.propertiesdata{
+  display: flex;
+  flex-direction: row;
+  flex-wrap:wrap;
+  justify-content:center;
+  align-items: center;
+}
+
+.userliked{
+  color: rgb(255, 255, 255);
+  background-color: #007bff;
+
+
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+}
+
+.usernotliked{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  background-color: #5b5b5b;
+  color: white;
+
+  -o-border-radius: 5px;
+}
+
+/* .usernotliked:hover{
+  background-color: #5b5b5b;
+color: white;
+} */

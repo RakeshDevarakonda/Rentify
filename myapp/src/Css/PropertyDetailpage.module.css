@@ -1,0 +1,121 @@
+@media screen and (max-width: 576px) {
+  .container {
+    width: 100% !important;
+  }
+  .swiperwidth{
+    width: 100% !important;
+  }
+}
+
+.propertydetaislcontainer {
+
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-top: 50px;
+  height: 100%;
+
+}
+
+.container {
+  width: 60% ;
+  padding: 0px !important;
+}
+
+.mainimage {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.swiperwidth{
+  width: 80%;
+}
+
+.details{
+  margin-top: 50px;
+}
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+  padding: 0px;
+}
+
+td,
+th {
+  border: 1px solid #dddddd;
+  text-align: center;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+
+.formname {
+  text-align: center;
+  margin: 10px 0px;
+}
+
+ 
+  .swidercenter{
+    display: flex !important;
+    justify-content: center !important;
+    height: 100% !important;
+  }
+  
+
+  img{ 
+    height: 400px;
+    width: 100%;
+    object-fit: contain;
+    -webkit-user-select: none; /* Safari */
+    -ms-user-select: none; /* IE 10 and IE 11 */
+    user-select: none; /* Standard syntax */
+  }
+
+ 
+
+
+  .absolutuepost{
+    position: fixed;
+    right: 5%;
+    bottom:10%;
+
+    z-index: 11;
+  }
+
+  .absolutuepost i{
+    margin-right: 10px;
+  }
+
+  .absolutuepost button{
+    color: white;
+    background-color:rgb(13,110,253);
+    padding: 10px;
+    border: 0;
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+}
+.interesteddiv{
+  width: 100%;
+  margin-top:20px ;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.interesteddiv button{
+  width: 50%;
+  padding: 10px;
+  background-color:rgb(36,122,253);
+  color: white;
+  border: 0;
+}

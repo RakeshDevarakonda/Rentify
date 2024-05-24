@@ -1,0 +1,102 @@
+* {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+}
+
+.sellpropertycomponent {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 100px;
+}
+
+.sellpropertycomponent .container {
+  width: 100%;
+  max-width: 800px;
+  padding: 20px;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+}
+.sellpropertycomponent .form-group {
+  margin-bottom: 20px;
+}
+
+.sellpropertycomponent .formname {
+  text-align: center;
+  margin: 30px 0px;
+}
+.sellpropertycomponent label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+.sellpropertycomponent input[type="text"],
+.sellpropertycomponent input[type="number"],
+.sellpropertycomponent select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+.sellpropertycomponent input[type="submit"] {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 100%;
+}
+.sellpropertycomponent input[type="submit"]:hover {
+  background-color: #0056b3;
+}
+
+.sellpropertycomponent .descriptionarea {
+  width: 100%;
+}
+
+.sellpropertycomponent input,
+.sellpropertycomponent label {
+  margin: 10px 0px;
+}
+
+.previewimage ul {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+.previewimage li {
+  list-style: none;
+  position: relative;
+  padding: 0;
+  margin: 0;
+  margin: 10px;
+}
+
+.previewimage img {
+  height: 100px;
+  width: 80px;
+  object-fit: cover;
+}
+
+.previewimage i {
+  position: absolute;
+  right: 0;
+  background-color: rgb(255, 255, 255);
+  border: 1px solid black;
+  top: 0;
+  color: red;
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+.tempimgremove{
+  cursor: pointer;
+}
+
+input[type="file"]{
+  cursor: pointer;
+}
