@@ -8,7 +8,7 @@ Welcome to the Rentify !
 2. Type cd Backend then type npm i after nodemodules installation completed type nodemon index.js
 3. Now Open a New Terminal type cd myapp after nodemodules installation completed type npm start
 4. please create .env file in root folder of Backend and myapp and write environment variables which is necessary  to start server
-5. Please Veiw at dotenvExample.txt as sample reference for .env file
+5. Please Veiw at dotenvExample.txt in both myapp and Backend folders as sample reference for .env file
 6. Make sure you follow in order to run servers without any error
 
 
