@@ -1,0 +1,27 @@
+# Backend environment variables
+
+
+
+PORT=8000
+
+
+FRONTEND_SERVER_NAME=http://localhost:3000
+
+
+FRONTEND_SERVER_NAME2=http://localhost:3001
+
+
+
+JWTTOKEN=your_jwt_secret_here 
+
+
+MONGODBURL=mongodb://localhost:27017/Rentify
+
+
+NODEMAILERUSERNAME=your_email@gmail.com
+
+
+NODEMAILERPASSWORD=your_email_password
+
+
+SENDEREMAIL=your_email@gmail.com
