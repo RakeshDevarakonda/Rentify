@@ -1,14 +1,14 @@
 
-Welcome to the Rentify
+Welcome to the Rentify !
 
 
 ## Getting Started:
 
 1. Clone this repository to your local machine.
 2. Type cd Backend then type npm i after nodemodules installation completed type nodemon index.js
-3. Now Open New Terminal type cd myapp after nodemodules installation completed type npm start
+3. Now Open a New Terminal type cd myapp after nodemodules installation completed type npm start
 4. please create .env file in root folder of Backend and myapp and write environment variables which is necessary  to start server
-5. pleae Veiw at dotenvExample.txt as sample reference for .env file
+5. Please Veiw at dotenvExample.txt as sample reference for .env file
 6. Make sure you follow in order to run servers without any error
 
 
