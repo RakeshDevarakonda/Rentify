@@ -450,7 +450,7 @@ export default function RentList({ editmode }) {
                                 to={`singleproperty/${property._id}`}
                               >
                                 <img
-                                  src={`${process.env.REACT_APP_BACKENDSERVERNAME}/${property.photos[0]}`}
+                                  src={`${process.env.REACT_APP_BACKENDSERVERNAME}/rentimages/${property.photos[0]}`}
                                   alt=""
                                 />
                               </Link>
@@ -460,7 +460,7 @@ export default function RentList({ editmode }) {
                                 to={`/singleproperty/${property._id}`}
                               >
                                 <img
-                                  src={`${process.env.REACT_APP_BACKENDSERVERNAME}/${property.photos[0]}`}
+                                  src={`${process.env.REACT_APP_BACKENDSERVERNAME}/rentimages/${property.photos[0]}`}
                                   alt=""
                                 />
                               </Link>
