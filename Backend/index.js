@@ -18,8 +18,7 @@ const app = express();
 app.use(
   cors({
     origin: [
-      process.env.FRONTEND_SERVER_NAME,
-      process.env.FRONTEND_SERVER_NAME2,
+      process.env.FRONTEND_SERVER_NAME
     ],
   })
 );
