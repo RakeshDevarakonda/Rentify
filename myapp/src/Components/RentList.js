@@ -155,6 +155,7 @@ export default function RentList({ editmode }) {
           setapplyfilter(response.data);
         }
       } catch (error) {
+        console.log(error)
         console.error(
           "Error fetching data:",
           error.response ? error.response.data : error.message
