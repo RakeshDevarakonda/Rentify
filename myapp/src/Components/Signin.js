@@ -7,10 +7,12 @@ import { useDispatch } from "react-redux";
 import { CheckUserLoggedInactions } from "../Redux/AuthStore.js";
 import { useNavigate } from "react-router-dom";
 import { sendPostRequest } from "./Privateroute.js";
+import { ClipLoader } from "react-spinners";
 
 export default function Signin() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setloading] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -25,6 +27,8 @@ export default function Signin() {
   }, [navigate]);
 
   const handlesubmit = (e) => {
+    setloading(true)
+
     e.preventDefault();
 
     const formData = {
@@ -60,11 +64,24 @@ export default function Signin() {
         console.log(error.response.data);
         toast.error(error.response.data);
       }
+      finally{
+        setloading(true)
+      }
     }
 
     sendsigninrequest();
   };
 
+  if (loading) {
+    return (
+      <div className="loader">
+        <ClipLoader color="#36d7b7" />
+      </div>
+    );
+  }
+
+
+  if (!loading) {
   return (
     <>
       <div className={signin.signincomponent}>
@@ -101,4 +118,5 @@ export default function Signin() {
       </div>
     </>
   );
+}
 }

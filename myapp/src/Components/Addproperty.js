@@ -4,11 +4,13 @@ import rental from "../Css/SellProperty.module.css";
 import {  useNavigate, useParams } from "react-router-dom";
 
 import { toast } from "react-toastify";
+import { ClipLoader } from "react-spinners";
 
 export default function Addproperty({ editpost }) {
   const { editpostid, userid } = useParams();
 
   const navigator = useNavigate();
+  const [loading, setloading] = useState(false);
 
   const userid2 = localStorage.getItem("userid");
   const [formdata, setformdata] = useState({
@@ -45,10 +47,12 @@ export default function Addproperty({ editpost }) {
           setformdata(response.data.Formdata);
           settemporaryimages([...response.data.photosdata]);
           console.log(response.data.photosdata);
+
         }
       } catch (error) {
         console.log(error.response);
       }
+      
     }
 
     if (editpost) {
@@ -96,6 +100,7 @@ export default function Addproperty({ editpost }) {
   };
 
   const handleSubmit = (e) => {
+    setloading(true)
     const datatosend = new FormData();
     e.preventDefault();
 
@@ -152,12 +157,26 @@ export default function Addproperty({ editpost }) {
 
         console.log(error.response.data);
       }
+     
     }
 
     sendPostRequest();
+    setloading(false)
+
   };
 
-  return (
+  if (loading) {
+    return (
+      <div className="loader">
+        <ClipLoader color="#36d7b7" />
+      </div>
+    );
+  }
+
+
+
+  if (!loading){
+    return (
     <>
       <div className={rental.sellpropertycomponent}>
         <div className={rental.container}>
@@ -352,4 +371,5 @@ export default function Addproperty({ editpost }) {
       </div>
     </>
   );
+}
 }

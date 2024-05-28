@@ -31,6 +31,8 @@ export default function PropertyDetailpage({ interested }) {
   const [loading, setloading] = useState(true);
 
   const checkmodal = async () => {
+    setloading(true);
+
     const result = await sendPostRequest();
 
     if (result) {
@@ -57,6 +59,7 @@ export default function PropertyDetailpage({ interested }) {
       }
       
       nodemailerrequest();
+      setloading(false);
 
 
     } else {

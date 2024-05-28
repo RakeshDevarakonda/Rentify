@@ -8,6 +8,19 @@ import filter from "../Css/filter.module.css";
 import { sendPostRequest } from "./Privateroute";
 
 export default function RentList({ editmode }) {
+  const [firstLoad, setFirstLoad] = useState(true);
+
+  useEffect(() => {
+    var visit = localStorage.getItem("firstVisit");
+
+    if (!visit) {
+      setFirstLoad(true);
+      localStorage.setItem("firstVisit", "true");
+    } else {
+      setFirstLoad(false);
+    }
+  }, []);
+
   const [filters, setFilters] = useState({
     type: "",
     bedrooms: "",
@@ -79,7 +92,6 @@ export default function RentList({ editmode }) {
 
   useEffect(() => {
     let filtered = allproperties.filter((e) => {
-      console.log(filters.FurnishedStatus === e.furnished)
       return (
         (filters.type === "" || filters.type === e.type) &&
         (filters.bedrooms === "" ||
@@ -155,7 +167,7 @@ export default function RentList({ editmode }) {
           setapplyfilter(response.data);
         }
       } catch (error) {
-        console.log(error)
+        console.log(error);
         console.error(
           "Error fetching data:",
           error.response ? error.response.data : error.message
@@ -233,22 +245,22 @@ export default function RentList({ editmode }) {
 
   const likebutton = async (propertyid, checkuseralreadyliked) => {
     const checklogin = await sendPostRequest();
-  
+
     if (!checklogin) {
       navigate("/signin");
-      return
+      return;
     }
-  
+
     const headers = {
       "Content-Type": "application/json",
       //'Authorization': 'Bearer your_access_token'
     };
-  
+
     const postdata = {
       userid: useridfromlocalstorage,
       propertyid: propertyid,
     };
-  
+
     async function SendLikeRequest(userliked) {
       try {
         const response = await axios.put(
@@ -256,16 +268,16 @@ export default function RentList({ editmode }) {
           postdata,
           { headers }
         );
-  
+
         console.log(response.data);
-  
+
         if (userliked === "likepost") {
-          const updatedProperties = allproperties.map(property => {
+          const updatedProperties = allproperties.map((property) => {
             if (property._id === propertyid) {
               return {
                 ...property,
                 likecount: property.likecount + 1,
-                likedby: [...property.likedby, useridfromlocalstorage]
+                likedby: [...property.likedby, useridfromlocalstorage],
               };
             }
             return property;
@@ -273,17 +285,19 @@ export default function RentList({ editmode }) {
           setallproperties(updatedProperties);
           setapplyfilter(updatedProperties);
         } else {
-          const updatedProperties = allproperties.map(property => {
+          const updatedProperties = allproperties.map((property) => {
             if (property._id === propertyid) {
               return {
                 ...property,
                 likecount: property.likecount - 1,
-                likedby: property.likedby.filter(id => id !== useridfromlocalstorage)
+                likedby: property.likedby.filter(
+                  (id) => id !== useridfromlocalstorage
+                ),
               };
             }
             return property;
           });
-  
+
           setallproperties(updatedProperties);
           setapplyfilter(updatedProperties);
         }
@@ -294,27 +308,38 @@ export default function RentList({ editmode }) {
         );
       }
     }
-  
+
     let userliked;
-  
+
     if (!checkuseralreadyliked) {
       userliked = "likepost";
     } else {
       userliked = "unlikepost";
     }
-  
+
     SendLikeRequest(userliked);
   };
-  
+
+
+  if (loading) {
+    return (
+      <div className="loader d-flex flex-column ">
+      <p>
+       Backend is currently hosted on <strong>
+       Render.com's (free tier)
+        </strong>, which means it might take a 1-2 minutes to load initially.
+
+
+      </p>
+      <p>Please wait.... </p>
+      <ClipLoader color="#36d7b7" />
+    </div>
+    );
+  }
 
   return (
     <>
-      {loading ? (
-        <div className="loader">
-          <ClipLoader color="#36d7b7" />
-        </div>
-      ) : (
-        <>
+    
           <div className={rentList.entirerentdata}>
             <div className={rentList.container}>
               <div className={rentList.filtercomponent}>
@@ -545,8 +570,6 @@ export default function RentList({ editmode }) {
               </div>
             </div>
           </div>
-        </>
-      )}
       <ul className={rentList.pagination}>
         {pagenumbers.map((number) => (
           <li
