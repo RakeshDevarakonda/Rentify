@@ -46,6 +46,7 @@ export default function PropertyDetailpage({ interested }) {
         postid:postid
       }
       
+      
       async function nodemailerrequest() {
         try {
           const response = await axios.post(`${process.env.REACT_APP_BACKENDSERVERNAME}/nodemailer`, postData, { headers });
