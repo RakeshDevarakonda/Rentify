@@ -30,7 +30,7 @@ app.use(bodyparser.json());
 app.use(express.static("assets"));
 
 app.get("/", (req, res) => {
-  res.send(process.env.MONGODB_URI);
+  res.send("firstroute");
 });
 
 app.use("/api", AuthRouter);
