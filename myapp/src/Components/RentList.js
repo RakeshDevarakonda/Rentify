@@ -232,6 +232,60 @@ export default function RentList({ editmode }) {
   };
 
   const likebutton = async (propertyid, checkuseralreadyliked) => {
+
+
+
+    let userliked;
+
+    if (!checkuseralreadyliked) {
+      userliked = "likepost";
+
+      const updatedtempProperties = allproperties.map((property) => {
+        if (property._id === propertyid) {
+          return {
+            ...property,
+            likecount: property.likecount + 1,
+            likedby: [...property.likedby,useridfromlocalstorage ]
+          };
+        }
+        return property;
+      });
+      
+      console.log("likedpost ")
+
+      setallproperties(updatedtempProperties);
+      setapplyfilter(updatedtempProperties);
+
+
+    } else {
+      userliked = "unlikepost";      
+      const updatedtempProperties = allproperties.map((property) => {
+        if (property._id === propertyid) {
+          return {
+            ...property,
+            likecount: property.likecount - 1,
+            likedby: property.likedby.filter(
+              (id) => id !== useridfromlocalstorage
+            ),
+          };
+        }
+        return property;
+      });
+      console.log("unlike post ")
+
+
+      setallproperties(updatedtempProperties);
+      setapplyfilter(updatedtempProperties);
+
+
+
+
+    }
+
+
+
+
+
     const checklogin = await sendPostRequest();
 
     if (!checklogin) {
@@ -296,52 +350,7 @@ export default function RentList({ editmode }) {
       }
     }
 
-    let userliked;
-
-    if (!checkuseralreadyliked) {
-      userliked = "likepost";
-
-      const updatedtempProperties = allproperties.map((property) => {
-        if (property._id === propertyid) {
-          return {
-            ...property,
-            likecount: property.likecount + 1,
-            likedby: [...property.likedby,useridfromlocalstorage ]
-          };
-        }
-        return property;
-      });
-      
-      console.log("likedpost ")
-
-      setallproperties(updatedtempProperties);
-      setapplyfilter(updatedtempProperties);
-
-
-    } else {
-      userliked = "unlikepost";      
-      const updatedtempProperties = allproperties.map((property) => {
-        if (property._id === propertyid) {
-          return {
-            ...property,
-            likecount: property.likecount - 1,
-            likedby: property.likedby.filter(
-              (id) => id !== useridfromlocalstorage
-            ),
-          };
-        }
-        return property;
-      });
-      console.log("unlike post ")
-
-
-      setallproperties(updatedtempProperties);
-      setapplyfilter(updatedtempProperties);
-
-
-
-
-    }
+   
 
     SendLikeRequest(userliked);
   };
