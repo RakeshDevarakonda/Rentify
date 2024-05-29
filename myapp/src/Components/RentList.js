@@ -121,7 +121,9 @@ export default function RentList({ editmode }) {
 
     setapplyfilter(filtered);
     setcurrentpage(1);
-  }, [filters, allproperties]);
+    setActivePage(1)
+  }, [filters]);
+
 
   useEffect(() => {
     const numbers = [];
