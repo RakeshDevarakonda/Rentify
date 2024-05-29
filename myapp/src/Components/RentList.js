@@ -234,7 +234,12 @@ export default function RentList({ editmode }) {
   };
 
   const likebutton = async (propertyid, checkuseralreadyliked) => {
+    const checklogin = await sendPostRequest();
 
+    if (!checklogin) {
+      navigate("/signin");
+      return;
+    }
 
 
     let userliked;
@@ -288,12 +293,7 @@ export default function RentList({ editmode }) {
 
 
 
-    const checklogin = await sendPostRequest();
-
-    if (!checklogin) {
-      navigate("/signin");
-      return;
-    }
+    
 
     const headers = {
       "Content-Type": "application/json",
