@@ -123,6 +123,8 @@ export default function RentList({ editmode }) {
     });
 
     setapplyfilter(filtered);
+    setcurrentpage(1);
+
   }, [filters, allproperties]);
 
   useEffect(() => {
