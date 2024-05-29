@@ -12,9 +12,7 @@
   
 }
 
-.toggleFilters:hover {
-    background-color: #7d8d9f;
-}
+
 
 .filterList {
     display: none;
