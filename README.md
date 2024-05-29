@@ -1,6 +1,8 @@
 
 Welcome to the Rentify !
 
+LIVE DEMO - https://rentify-sooty.vercel.app/
+
 
 ## Getting Started:
 
