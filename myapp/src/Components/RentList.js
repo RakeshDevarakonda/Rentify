@@ -8,18 +8,8 @@ import filter from "../Css/filter.module.css";
 import { sendPostRequest } from "./Privateroute";
 
 export default function RentList({ editmode }) {
-  const [firstLoad, setFirstLoad] = useState(true);
 
-  useEffect(() => {
-    var visit = localStorage.getItem("firstVisit");
-
-    if (!visit) {
-      setFirstLoad(true);
-      localStorage.setItem("firstVisit", "true");
-    } else {
-      setFirstLoad(false);
-    }
-  }, []);
+  
 
   const [filters, setFilters] = useState({
     type: "",
