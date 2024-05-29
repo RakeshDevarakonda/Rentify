@@ -345,13 +345,13 @@ export default function RentList({ editmode }) {
           //   setallproperties(updatedProperties);
           //   setapplyfilter(updatedProperties);
           // }
-          // console.error(
-          //   "Error posting data:",
-          //   error.response ? error.response.data : error.message
-          // );
+          console.error(
+            "Error posting data:",
+            error.response ? error.response.data : error.message
+          );
       }
 
-      
+
     }
 
    
