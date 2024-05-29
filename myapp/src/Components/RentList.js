@@ -314,14 +314,7 @@ export default function RentList({ editmode }) {
   if (loading) {
     return (
       <div className="loader d-flex flex-column ">
-      <p>
-       Backend is currently hosted on <strong>
-       Render.com's (free tier)
-        </strong>, which means it might take a 1-2 minutes to load initially.
-
-
-      </p>
-      <p>Please wait.... </p>
+      
       <ClipLoader color="#36d7b7" />
     </div>
     );
