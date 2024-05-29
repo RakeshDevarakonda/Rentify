@@ -8,9 +8,6 @@ import filter from "../Css/filter.module.css";
 import { sendPostRequest } from "./Privateroute";
 
 export default function RentList({ editmode }) {
-
-  
-
   const [filters, setFilters] = useState({
     type: "",
     bedrooms: "",
@@ -124,7 +121,6 @@ export default function RentList({ editmode }) {
 
     setapplyfilter(filtered);
     setcurrentpage(1);
-
   }, [filters, allproperties]);
 
   useEffect(() => {
@@ -261,22 +257,8 @@ export default function RentList({ editmode }) {
           { headers }
         );
 
-        console.log(response.data);
-
+      } catch (error) {
         if (userliked === "likepost") {
-          const updatedProperties = allproperties.map((property) => {
-            if (property._id === propertyid) {
-              return {
-                ...property,
-                likecount: property.likecount + 1,
-                likedby: [...property.likedby, useridfromlocalstorage],
-              };
-            }
-            return property;
-          });
-          setallproperties(updatedProperties);
-          setapplyfilter(updatedProperties);
-        } else {
           const updatedProperties = allproperties.map((property) => {
             if (property._id === propertyid) {
               return {
@@ -289,11 +271,24 @@ export default function RentList({ editmode }) {
             }
             return property;
           });
+          setallproperties(updatedProperties);
+          setapplyfilter(updatedProperties);
+        } else {
+          const updatedProperties = allproperties.map((property) => {
+            if (property._id === propertyid) {
+              return {
+                ...property,
+                likecount: property.likecount + 1,
+                likedby: [...property.likedby, useridfromlocalstorage],
+
+              };
+            }
+            return property;
+          });
 
           setallproperties(updatedProperties);
           setapplyfilter(updatedProperties);
         }
-      } catch (error) {
         console.error(
           "Error posting data:",
           error.response ? error.response.data : error.message
@@ -305,263 +300,291 @@ export default function RentList({ editmode }) {
 
     if (!checkuseralreadyliked) {
       userliked = "likepost";
+
+      const updatedtempProperties = allproperties.map((property) => {
+        if (property._id === propertyid) {
+          return {
+            ...property,
+            likecount: property.likecount + 1,
+            likedby: [...property.likedby,useridfromlocalstorage ]
+          };
+        }
+        return property;
+      });
+      
+      console.log("likedpost ")
+
+      setallproperties(updatedtempProperties);
+      setapplyfilter(updatedtempProperties);
+
+
     } else {
-      userliked = "unlikepost";
+      userliked = "unlikepost";      
+      const updatedtempProperties = allproperties.map((property) => {
+        if (property._id === propertyid) {
+          return {
+            ...property,
+            likecount: property.likecount - 1,
+            likedby: property.likedby.filter(
+              (id) => id !== useridfromlocalstorage
+            ),
+          };
+        }
+        return property;
+      });
+      console.log("unlike post ")
+
+
+      setallproperties(updatedtempProperties);
+      setapplyfilter(updatedtempProperties);
+
+
+
+
     }
 
     SendLikeRequest(userliked);
   };
 
-
   if (loading) {
     return (
       <div className="loader d-flex flex-column ">
-      <p>
-       Backend is currently hosted on <strong>
-       Render.com's (free tier)
-        </strong>, which means it might take a 1-2 minutes to load initially.
-
-
-      </p>
-      <p>Please wait.... </p>
-      <ClipLoader color="#36d7b7" />
-    </div>
+        <p>
+          Backend is currently hosted on{" "}
+          <strong>Render.com's (free tier)</strong>, which means it might take a
+          1-2 minutes to load initially.
+        </p>
+        <p>Please wait.... </p>
+        <ClipLoader color="#36d7b7" />
+      </div>
     );
   }
 
   return (
     <>
-    
-          <div className={rentList.entirerentdata}>
-            <div className={rentList.container}>
-              <div className={rentList.filtercomponent}>
-                <div>
+      <div className={rentList.entirerentdata}>
+        <div className={rentList.container}>
+          <div className={rentList.filtercomponent}>
+            <div>
+              <button className={filter.toggleFilters} onClick={toggleFilters}>
+                Filters
+              </button>
+
+              <div
+                className={filter.filterList}
+                style={{ display: showFilters ? "flex" : "none" }}
+              >
+                {showFilters && (
                   <button
-                    className={filter.toggleFilters}
-                    onClick={toggleFilters}
+                    className={filter.resetFilters}
+                    onClick={resetFilters}
                   >
-                    Filters
+                    Reset
                   </button>
-
-                  <div
-                    className={filter.filterList}
-                    style={{ display: showFilters ? "flex" : "none" }}
-                  >
-                    {showFilters && (
-                      <button
-                        className={filter.resetFilters}
-                        onClick={resetFilters}
-                      >
-                        Reset
-                      </button>
-                    )}
-
-                    <select
-                      id="type"
-                      className={filter.mySelect}
-                      value={filters.type}
-                      onChange={handleChange}
-                    >
-                      <option value="">Type</option>
-                      <option value="appartment">Appartment</option>
-                      <option value="building">Building</option>
-                      <option value="villa">Villa</option>
-                      <option value="house">House</option>
-                    </select>
-
-                    <select
-                      id="bedrooms"
-                      className={filter.mySelect}
-                      value={filters.bedrooms}
-                      onChange={handleChange}
-                    >
-                      <option value="">Bedrooms</option>
-                      <option value="1">1</option>
-                      <option value="2">2</option>
-                      <option value="3+">3+</option>
-                    </select>
-
-                    <select
-                      id="bathrooms"
-                      className={filter.mySelect}
-                      value={filters.bathrooms}
-                      onChange={handleChange}
-                    >
-                      <option value="">Bathrooms</option>
-                      <option value="1">1</option>
-                      <option value="2">2</option>
-                      <option value="3+">3+</option>
-                    </select>
-
-                    <select
-                      id="rent"
-                      className={filter.mySelect}
-                      value={filters.rent}
-                      onChange={handleChange}
-                    >
-                      <option value="">price</option>
-                      <option value="0-5000">0 - 5000</option>
-                      <option value="5001-8000">5001 - 8000</option>
-                      <option value="8001-10000">8001 - 10000</option>
-                      <option value="10001-5000">10001 - 15000</option>
-                      <option value="15001+">15001+</option>
-                    </select>
-
-                    <select
-                      id="FurnishedStatus"
-                      className={filter.mySelect}
-                      value={filters.furnished}
-                      onChange={handleChange}
-                    >
-                      <option value="">Furnished Status</option>
-
-                      <option value="fully_furnished">Fully Furnished</option>
-                      <option value="semi_furnished">Semi Furnished</option>
-                      <option value="not_furnished">Not Furnished</option>
-                    </select>
-
-                    <select
-                      className={filter.mySelect}
-                      value={filters.bachelors}
-                      id="bachelors"
-                      onChange={handleChange}
-                    >
-                      <option value="">Bachelors</option>
-                      <option value="not_allowed">Not Allowed</option>
-                      <option value="allowed">Allowed</option>
-                    </select>
-
-                    <select
-                      id="squarefeet"
-                      className={filter.mySelect}
-                      value={filters.squarefeet}
-                      onChange={handleChange}
-                    >
-                      <option value="">SqFt</option>
-                      <option value="0-500">0 - 500 sqft</option>
-                      <option value="501-1000">501 - 1000 sqft</option>
-                      <option value="1001-1500">1001 - 1500 sqft</option>
-                      <option value="1501-2000">1501 - 2000 sqft</option>
-                      <option value="2001+">2001+ sq ft</option>
-                    </select>
-                  </div>
-                </div>
-              </div>
-
-              <div className={rentList.propertiesdata}>
-                {tobeshownproperties.length <= 0 && (
-                  <div>
-                    <h1>No Properties to show</h1>
-                  </div>
                 )}
-                {tobeshownproperties &&
-                  tobeshownproperties.length > 0 &&
-                  tobeshownproperties.map((property, index) => (
-                    <div className={rentList.rentdata} key={property._id}>
-                      <div className={rentList.rentimage}>
-                        {property.photos[0] && (
-                          <>
-                            {editmode ? (
-                              <Link
-                                className={rentList.imageanchoretag}
-                                to={`singleproperty/${property._id}`}
-                              >
-                                <img
-                                  src={`${process.env.REACT_APP_BACKENDSERVERNAME}/rentimages/${property.photos[0]}`}
-                                  alt=""
-                                />
-                              </Link>
-                            ) : (
-                              <Link
-                                className={rentList.imageanchoretag}
-                                to={`/singleproperty/${property._id}`}
-                              >
-                                <img
-                                  src={`${process.env.REACT_APP_BACKENDSERVERNAME}/rentimages/${property.photos[0]}`}
-                                  alt=""
-                                />
-                              </Link>
-                            )}
-                          </>
-                        )}
 
-                        {editmode && (
-                          <i
-                            className={`fa-solid fa-pen-to-square ${rentList.settingsbutton}`}
-                            onClick={(event) => handleButtonClick(index, event)}
-                          ></i>
-                        )}
-                        {showDropdown && dropdownIndex === index && (
-                          <div ref={dropdownRef} className={rentList.tooltip}>
-                            <Link to={`editpost/${property._id}`}>
-                              edit post
-                            </Link>
-                            <button
-                              onClick={(event) =>
-                                deletedata(event, property._id, index)
-                              }
-                            >
-                              Delete
-                            </button>
-                          </div>
-                        )}
-                      </div>
+                <select
+                  id="type"
+                  className={filter.mySelect}
+                  value={filters.type}
+                  onChange={handleChange}
+                >
+                  <option value="">Type</option>
+                  <option value="appartment">Appartment</option>
+                  <option value="building">Building</option>
+                  <option value="villa">Villa</option>
+                  <option value="house">House</option>
+                </select>
 
-                      <div className={rentList.rentdetails}>
-                        <div className=" mb-4 d-flex justify-content-evenly ">
-                          <button
-                            onClick={() =>
-                              likebutton(
-                                property._id,
-                                property.likedby.includes(
-                                  useridfromlocalstorage
-                                )
-                              )
-                            }
-                            className={` ${
-                              useridfromlocalstorage &&
-                              property.likedby.includes(useridfromlocalstorage)
-                                ? rentList.userliked
-                                : rentList.usernotliked
-                            }`}
-                          >
-                            <i
-                              style={{ fontSize: "20px" }}
-                              class="fa-regular fa-thumbs-up me-3"
-                            ></i>{" "}
-                            {useridfromlocalstorage &&
-                            property.likedby.includes(useridfromlocalstorage)
-                              ? "Liked"
-                              : "Like"}
-                          </button>
-                          <p className="w-50 text-end me-2">
-                            {property.likecount} Likes
-                          </p>
-                        </div>
-                        <div className={rentList.rentprice}>
-                          <p>
-                            <i class="fa-solid fa-indian-rupee-sign me-2"></i>
-                            12000
-                          </p>
-                        </div>
-                        <div className={rentList.rentpropertydetails}>
-                          <p>
-                            {property.bedrooms} <span></span>Bds -{" "}
-                            {property.bathrooms} Ba
-                          </p>
-                        </div>
-                        <div className={rentList.rentlocation}>
-                          <p>
-                            <i class="fa-solid fa-location-dot me-2"></i>
-                            {property.place}
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                  ))}
+                <select
+                  id="bedrooms"
+                  className={filter.mySelect}
+                  value={filters.bedrooms}
+                  onChange={handleChange}
+                >
+                  <option value="">Bedrooms</option>
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3+">3+</option>
+                </select>
+
+                <select
+                  id="bathrooms"
+                  className={filter.mySelect}
+                  value={filters.bathrooms}
+                  onChange={handleChange}
+                >
+                  <option value="">Bathrooms</option>
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3+">3+</option>
+                </select>
+
+                <select
+                  id="rent"
+                  className={filter.mySelect}
+                  value={filters.rent}
+                  onChange={handleChange}
+                >
+                  <option value="">price</option>
+                  <option value="0-5000">0 - 5000</option>
+                  <option value="5001-8000">5001 - 8000</option>
+                  <option value="8001-10000">8001 - 10000</option>
+                  <option value="10001-5000">10001 - 15000</option>
+                  <option value="15001+">15001+</option>
+                </select>
+
+                <select
+                  id="FurnishedStatus"
+                  className={filter.mySelect}
+                  value={filters.furnished}
+                  onChange={handleChange}
+                >
+                  <option value="">Furnished Status</option>
+
+                  <option value="fully_furnished">Fully Furnished</option>
+                  <option value="semi_furnished">Semi Furnished</option>
+                  <option value="not_furnished">Not Furnished</option>
+                </select>
+
+                <select
+                  className={filter.mySelect}
+                  value={filters.bachelors}
+                  id="bachelors"
+                  onChange={handleChange}
+                >
+                  <option value="">Bachelors</option>
+                  <option value="not_allowed">Not Allowed</option>
+                  <option value="allowed">Allowed</option>
+                </select>
+
+                <select
+                  id="squarefeet"
+                  className={filter.mySelect}
+                  value={filters.squarefeet}
+                  onChange={handleChange}
+                >
+                  <option value="">SqFt</option>
+                  <option value="0-500">0 - 500 sqft</option>
+                  <option value="501-1000">501 - 1000 sqft</option>
+                  <option value="1001-1500">1001 - 1500 sqft</option>
+                  <option value="1501-2000">1501 - 2000 sqft</option>
+                  <option value="2001+">2001+ sq ft</option>
+                </select>
               </div>
             </div>
           </div>
+
+          <div className={rentList.propertiesdata}>
+            {tobeshownproperties.length <= 0 && (
+              <div>
+                <h1>No Properties to show</h1>
+              </div>
+            )}
+            {tobeshownproperties &&
+              tobeshownproperties.length > 0 &&
+              tobeshownproperties.map((property, index) => (
+                <div className={rentList.rentdata} key={property._id}>
+                  <div className={rentList.rentimage}>
+                    {property.photos[0] && (
+                      <>
+                        {editmode ? (
+                          <Link
+                            className={rentList.imageanchoretag}
+                            to={`singleproperty/${property._id}`}
+                          >
+                            <img
+                              src={`${process.env.REACT_APP_BACKENDSERVERNAME}/rentimages/${property.photos[0]}`}
+                              alt=""
+                            />
+                          </Link>
+                        ) : (
+                          <Link
+                            className={rentList.imageanchoretag}
+                            to={`/singleproperty/${property._id}`}
+                          >
+                            <img
+                              src={`${process.env.REACT_APP_BACKENDSERVERNAME}/rentimages/${property.photos[0]}`}
+                              alt=""
+                            />
+                          </Link>
+                        )}
+                      </>
+                    )}
+
+                    {editmode && (
+                      <i
+                        className={`fa-solid fa-pen-to-square ${rentList.settingsbutton}`}
+                        onClick={(event) => handleButtonClick(index, event)}
+                      ></i>
+                    )}
+                    {showDropdown && dropdownIndex === index && (
+                      <div ref={dropdownRef} className={rentList.tooltip}>
+                        <Link to={`editpost/${property._id}`}>edit post</Link>
+                        <button
+                          onClick={(event) =>
+                            deletedata(event, property._id, index)
+                          }
+                        >
+                          Delete
+                        </button>
+                      </div>
+                    )}
+                  </div>
+
+                  <div className={rentList.rentdetails}>
+                    <div className=" mb-4 d-flex justify-content-evenly ">
+                      <button
+                        onClick={() =>
+                          likebutton(
+                            property._id,
+                            property.likedby.includes(useridfromlocalstorage)
+                          )
+                        }
+                        className={` ${
+                          useridfromlocalstorage &&
+                          property.likedby.includes(useridfromlocalstorage)
+                            ? rentList.userliked
+                            : rentList.usernotliked
+                        }`}
+                      >
+                        <i
+                          style={{ fontSize: "20px" }}
+                          class="fa-regular fa-thumbs-up me-3"
+                        ></i>
+                        {useridfromlocalstorage &&
+                        property.likedby.includes(useridfromlocalstorage)
+                          ? "Liked"
+                          : "Like"}
+                      </button>
+                      <p className="w-50 text-end me-2">
+                        {property.likecount} Likes
+                      </p>
+                    </div>
+                    <div className={rentList.rentprice}>
+                      <p>
+                        <i class="fa-solid fa-indian-rupee-sign me-2"></i>
+                        12000
+                      </p>
+                    </div>
+                    <div className={rentList.rentpropertydetails}>
+                      <p>
+                        {property.bedrooms} <span></span>Bds -{" "}
+                        {property.bathrooms} Ba
+                      </p>
+                    </div>
+                    <div className={rentList.rentlocation}>
+                      <p>
+                        <i class="fa-solid fa-location-dot me-2"></i>
+                        {property.place}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              ))}
+          </div>
+        </div>
+      </div>
       <ul className={rentList.pagination}>
         {pagenumbers.map((number) => (
           <li
