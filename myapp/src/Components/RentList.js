@@ -306,48 +306,52 @@ export default function RentList({ editmode }) {
     async function SendLikeRequest(userliked) {
       try {
         const response = await axios.put(
-          `${process.env.REACT_APP_BACKENDSERVERNAME}/api/${userliked}`,
+          `${process.env.REACT_APP_BACKENSERVERNAME}/api/${userliked}`,
           postdata,
           { headers }
         );
 
       } catch (error) {
-        if (userliked === "likepost") {
-          const updatedProperties = allproperties.map((property) => {
-            if (property._id === propertyid) {
-              return {
-                ...property,
-                likecount: property.likecount - 1,
-                likedby: property.likedby.filter(
-                  (id) => id !== useridfromlocalstorage
-                ),
-              };
-            }
-            return property;
-          });
-          setallproperties(updatedProperties);
-          setapplyfilter(updatedProperties);
-        } else {
-          const updatedProperties = allproperties.map((property) => {
-            if (property._id === propertyid) {
-              return {
-                ...property,
-                likecount: property.likecount + 1,
-                likedby: [...property.likedby, useridfromlocalstorage],
 
-              };
-            }
-            return property;
-          });
-
-          setallproperties(updatedProperties);
-          setapplyfilter(updatedProperties);
-        }
-        console.error(
-          "Error posting data:",
-          error.response ? error.response.data : error.message
-        );
+          
+          // if (userliked === "likepost") {
+          //   const updatedProperties = allproperties.map((property) => {
+          //     if (property._id === propertyid) {
+          //       return {
+          //         ...property,
+          //         likecount: property.likecount - 1,
+          //         likedby: property.likedby.filter(
+          //           (id) => id !== useridfromlocalstorage
+          //         ),
+          //       };
+          //     }
+          //     return property;
+          //   });
+          //   setallproperties(updatedProperties);
+          //   setapplyfilter(updatedProperties);
+          // } else {
+          //   const updatedProperties = allproperties.map((property) => {
+          //     if (property._id === propertyid) {
+          //       return {
+          //         ...property,
+          //         likecount: property.likecount + 1,
+          //         likedby: [...property.likedby, useridfromlocalstorage],
+  
+          //       };
+          //     }
+          //     return property;
+          //   });
+  
+          //   setallproperties(updatedProperties);
+          //   setapplyfilter(updatedProperties);
+          // }
+          // console.error(
+          //   "Error posting data:",
+          //   error.response ? error.response.data : error.message
+          // );
       }
+
+      
     }
 
    
