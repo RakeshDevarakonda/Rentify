@@ -7,11 +7,11 @@ import { toast } from "react-toastify";
 import filter from "../Css/filter.module.css";
 import { sendPostRequest } from "./Privateroute";
 
-import { io } from 'socket.io-client';
+// import { io } from 'socket.io-client';
 
 export default function RentList({ editmode }) {
 
-  var socket = io(process.env.REACT_APP_BACKENDSERVERNAME);
+  // var socket = io(process.env.REACT_APP_BACKENDSERVERNAME);
   const [filters, setFilters] = useState({
     type: "",
     bedrooms: "",
@@ -286,30 +286,36 @@ export default function RentList({ editmode }) {
     }
 
 
+    const headers = {
+      "Content-Type": "application/json",
+      //'Authorization': 'Bearer your_access_token'
+    };
+
+
 
     const postdata = {
       userid: useridfromlocalstorage,
       propertyid: propertyid,
     };
 
-    socket.emit("likebuttoncliked",{postdata,userliked})
+    // socket.emit("likebuttoncliked",{postdata,userliked})
 
 
-    // async function SendLikeRequest(userliked) {
-    //   console.log(userliked);
-    //   try {
-    //     const response = await axios.put(
-    //       `${process.env.REACT_APP_BACKENDSERVERNAME}/api/${userliked}`,
-    //       postdata,
-    //       { headers }
-    //     );
-    //     console.log(response.data);
-    //   } catch (error) {
-    //     console.log(error);
-    //   }
-    // }
+    async function SendLikeRequest(userliked) {
+      console.log(userliked);
+      try {
+        const response = await axios.put(
+          `${process.env.REACT_APP_BACKENDSERVERNAME}/api/${userliked}`,
+          postdata,
+          { headers }
+        );
+        console.log(response.data);
+      } catch (error) {
+        console.log(error);
+      }
+    }
 
-    // SendLikeRequest(userliked);
+    SendLikeRequest(userliked);
   };
 
   if (loading) {
