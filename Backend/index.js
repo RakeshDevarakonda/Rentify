@@ -10,7 +10,7 @@ import { propertycollections } from "./src/schemas/propertyschema.js";
 import propertiesRouter from "./src/Routes/properties.js";
 import sendMail from "./nodemailer.js";
 import { usercollections } from "./src/schemas/userschema.js";
-import LikeRouter from "./src/Routes/LikeRouter.js";
+// import LikeRouter from "./src/Routes/LikeRouter.js";
 
 import RouteCheck from "./src/Routes/Routecheck.js";
 import NodemailerRoute from "./src/Routes/NodemailerRoute.js";
