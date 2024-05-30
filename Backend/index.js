@@ -51,6 +51,57 @@ const server = createServer(app);
 
 
 
+const io = new Server(server, {
+  cors: {
+    origin:[process.env.FRONTEND_SERVER_NAME] ,
+    methods: ['GET', 'POST', "PUT", "DELETE"],
+  },
+});
+
+io.on("connection", (socket) => {
+  // console.log('Connection successful');
+
+  socket.on("likebuttoncliked", async (e) => {
+    const { postdata, userliked } = e;
+    const { userid, propertyid } = postdata;
+
+
+    try {
+      if (userliked === "likepost") {
+        await propertycollections.updateOne(
+          { _id: new ObjectId(propertyid) },
+          {
+            $addToSet: { likedby: new ObjectId(userid) },
+            $inc: { likecount: 1 },
+          }
+        );
+        console.log("Like added successfully");
+
+      } else if (userliked === "unlikepost") {
+        await propertycollections.updateOne(
+          { _id: new ObjectId(propertyid) },
+          {
+            $pull: { likedby: new ObjectId(userid) },
+            $inc: { likecount: -1 },
+          }
+        );
+        console.log("Like removed successfully");
+      }
+    } catch (error) {
+      console.error("Error updating likes:", error);
+    }
+
+
+  });
+
+  socket.on("disconnect", () => {
+    // console.log('User disconnected');
+  });
+});
+
+
+
+
 app.use((err, req, res, next) => {
   if (err.customerror) {
     console.log(err.message, err.statusCode);

@@ -7,11 +7,11 @@ import { toast } from "react-toastify";
 import filter from "../Css/filter.module.css";
 import { sendPostRequest } from "./Privateroute";
 
-// import { io } from 'socket.io-client';
+import { io } from 'socket.io-client';
 
 export default function RentList({ editmode }) {
 
-  // var socket = io(process.env.REACT_APP_BACKENDSERVERNAME);
+  var socket = io(process.env.REACT_APP_BACKENDSERVERNAME);
   const [filters, setFilters] = useState({
     type: "",
     bedrooms: "",
@@ -298,7 +298,7 @@ export default function RentList({ editmode }) {
       propertyid: propertyid,
     };
 
-    // socket.emit("likebuttoncliked",{postdata,userliked})
+    socket.emit("likebuttoncliked",{postdata,userliked})
 
 
     async function SendLikeRequest(userliked) {
@@ -315,7 +315,7 @@ export default function RentList({ editmode }) {
       }
     }
 
-    SendLikeRequest(userliked);
+    // SendLikeRequest(userliked);
   };
 
   if (loading) {
