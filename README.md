@@ -42,7 +42,7 @@ LIVE DEMO - https://rentify-sooty.vercel.app/
 
 ### Like Button:
 
-- Each property has a "Like" button to track user interest. The like count is live.
+- Each property has a "Like" button to track user interest. The like count is live. used web socket for like button
 
 
 
