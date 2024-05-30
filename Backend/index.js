@@ -53,8 +53,7 @@ const server = createServer(app);
 
 const io = new Server(server, {
   cors: {
-    origin:[process.env.FRONTEND_SERVER_NAME] ,
-    methods: ['GET', 'POST', "PUT", "DELETE"],
+    origin:[process.env.FRONTEND_SERVER_NAME] 
   },
 });
 
