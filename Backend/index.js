@@ -13,6 +13,9 @@ import { usercollections } from "./src/schemas/userschema.js";
 import { ObjectId } from "mongodb";
 import LikeRouter from "./src/Routes/LikeRouter.js";
 
+import RouteCheck from "./src/Routes/Routecheck.js";
+import NodemailerRoute from "./src/Routes/NodemailerRoute.js";
+
 
 const app = express();
 
@@ -41,15 +44,9 @@ app.use("/api", propertiesRouter);
 
 app.use("/api",LikeRouter)
 
+app.use("/api",RouteCheck)
 
-
-app.post("/routecheck", jwtAuth, (req, res, next) => {
-  try {
-    res.send("authorized");
-  } catch (error) {
-    console.log(error);
-  }
-});
+app.use("/api",NodemailerRoute)
 
 
 
@@ -57,33 +54,13 @@ app.post("/routecheck", jwtAuth, (req, res, next) => {
 
 
 
-app.post("/nodemailer", async (req, res, next) => {
-  const { userid, postid } = req.body;
-  const buyerdetails = await usercollections.findOne({
-    _id: new ObjectId(userid),
-  });
-  const sellerdetails = await propertycollections
-    .findOne({ _id: new ObjectId(postid) })
-    .populate("userid");
 
-  const buyeremail = buyerdetails.email;
-  const buyername = buyerdetails.firstName + " " + buyerdetails.lastName;
-  const buyernumber = buyerdetails.mobilenumber;
 
-  const selleremail = sellerdetails.userid.email;
-  const sellername =
-    sellerdetails.userid.firstName + " " + sellerdetails.userid.lastName;
-  const sellernumber = sellerdetails.userid.mobilenumber;
 
-  sendMail({ send: "seller", buyeremail, buyername, buyernumber, selleremail });
-  sendMail({
-    send: "buyer",
-    selleremail,
-    sellername,
-    sellernumber,
-    buyeremail,
-  });
-});
+
+
+
+
 
 
 
@@ -104,3 +81,4 @@ app.listen(PORT, () => {
   console.log("Example app listening on port " + PORT + "!");
   mongoosedatabse();
 });
+

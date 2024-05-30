@@ -2,6 +2,7 @@ import { ObjectId } from "mongodb";
 import { propertycollections } from "../schemas/propertyschema.js";
 
 export const likepost = async (req, res, next) => {
+
     const {userid,propertyid}=req.body
     console.log(req.body)
   try {
@@ -12,6 +13,8 @@ export const likepost = async (req, res, next) => {
         $inc: { likecount: 1 },
       }
     );
+
+    console.log("liked")
 
     res.send("like added succesfully");
   } catch (error) {
@@ -32,6 +35,8 @@ export const unlikepost = async (req, res, next) => {
           $inc: { likecount: -1 },
         }
     );
+
+    console.log("unliked")
 
     res.send("like deleted succesfully");
 

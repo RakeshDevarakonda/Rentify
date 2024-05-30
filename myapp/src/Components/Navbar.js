@@ -34,7 +34,7 @@ const Navbar = () => {
 
     try {
       const response = await axios.post(
-        `${process.env.REACT_APP_BACKENDSERVERNAME}/routecheck`,
+        `${process.env.REACT_APP_BACKENDSERVERNAME}/api/routecheck`,
         {},
         { headers }
       );

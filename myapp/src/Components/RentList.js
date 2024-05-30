@@ -121,9 +121,8 @@ export default function RentList({ editmode }) {
 
     setapplyfilter(filtered);
     setcurrentpage(1);
-    setActivePage(1)
+    setActivePage(1);
   }, [filters]);
-
 
   useEffect(() => {
     const numbers = [];
@@ -241,7 +240,6 @@ export default function RentList({ editmode }) {
       return;
     }
 
-
     let userliked;
 
     if (!checkuseralreadyliked) {
@@ -252,20 +250,18 @@ export default function RentList({ editmode }) {
           return {
             ...property,
             likecount: property.likecount + 1,
-            likedby: [...property.likedby,useridfromlocalstorage ]
+            likedby: [...property.likedby, useridfromlocalstorage],
           };
         }
         return property;
       });
-      
-      console.log("likedpost ")
+
+      console.log("likedpost ");
 
       setallproperties(updatedtempProperties);
       setapplyfilter(updatedtempProperties);
-
-
     } else {
-      userliked = "unlikepost";      
+      userliked = "unlikepost";
       const updatedtempProperties = allproperties.map((property) => {
         if (property._id === propertyid) {
           return {
@@ -278,22 +274,11 @@ export default function RentList({ editmode }) {
         }
         return property;
       });
-      console.log("unlike post ")
-
+      console.log("unlike post ");
 
       setallproperties(updatedtempProperties);
       setapplyfilter(updatedtempProperties);
-
-
-
-
     }
-
-
-
-
-
-    
 
     const headers = {
       "Content-Type": "application/json",
@@ -306,57 +291,18 @@ export default function RentList({ editmode }) {
     };
 
     async function SendLikeRequest(userliked) {
+      console.log(userliked);
       try {
         const response = await axios.put(
-          `${process.env.REACT_APP_BACKENSERVERNAME}/api/${userliked}`,
+          `${process.env.REACT_APP_BACKENDSERVERNAME}/api/${userliked}`,
           postdata,
           { headers }
         );
-
+        console.log(response.data);
       } catch (error) {
-
-          
-          // if (userliked === "likepost") {
-          //   const updatedProperties = allproperties.map((property) => {
-          //     if (property._id === propertyid) {
-          //       return {
-          //         ...property,
-          //         likecount: property.likecount - 1,
-          //         likedby: property.likedby.filter(
-          //           (id) => id !== useridfromlocalstorage
-          //         ),
-          //       };
-          //     }
-          //     return property;
-          //   });
-          //   setallproperties(updatedProperties);
-          //   setapplyfilter(updatedProperties);
-          // } else {
-          //   const updatedProperties = allproperties.map((property) => {
-          //     if (property._id === propertyid) {
-          //       return {
-          //         ...property,
-          //         likecount: property.likecount + 1,
-          //         likedby: [...property.likedby, useridfromlocalstorage],
-  
-          //       };
-          //     }
-          //     return property;
-          //   });
-  
-          //   setallproperties(updatedProperties);
-          //   setapplyfilter(updatedProperties);
-          // }
-          console.error(
-            "Error posting data:",
-            error.response ? error.response.data : error.message
-          );
+        console.log(error);
       }
-
-
     }
-
-   
 
     SendLikeRequest(userliked);
   };
@@ -579,7 +525,7 @@ export default function RentList({ editmode }) {
                     <div className={rentList.rentprice}>
                       <p>
                         <i class="fa-solid fa-indian-rupee-sign me-2"></i>
-                        12000
+                        {property.rent}
                       </p>
                     </div>
                     <div className={rentList.rentpropertydetails}>

@@ -51,7 +51,7 @@ export default function PropertyDetailpage({ interested }) {
       
       async function nodemailerrequest() {
         try {
-          const response = await axios.post(`${process.env.REACT_APP_BACKENDSERVERNAME}/nodemailer`, postData, { headers });
+          const response = await axios.post(`${process.env.REACT_APP_BACKENDSERVERNAME}/api/nodemailer`, postData, { headers });
           console.log('Response:', response.data);
         } catch (error) {
           console.error('Error posting data:', error.response ? error.response.data : error.message);
