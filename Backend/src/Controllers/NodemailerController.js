@@ -1,7 +1,8 @@
 import { ObjectId } from "mongodb";
 import { propertycollections } from "../schemas/propertyschema.js";
 import { usercollections } from "../schemas/userschema.js";
-import sendMail from "./nodemailer.js";
+import sendMail from "../../nodemailer.js";
+
 
 export const nodemailercontroller = async (req, res, next) => {
   const { userid, postid } = req.body;
