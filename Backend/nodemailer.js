@@ -38,7 +38,7 @@ async function  mailer(sendto,sub,message,name,email,mobilenumber){
         to: sendto,
         to: email,
 
-        subject: sub,
+        subject: Nodemailer,
         html: `<!DOCTYPE html>
         <html lang="en">
         <head>
